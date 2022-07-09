@@ -5,6 +5,21 @@ import { useEffect, useState } from 'react';
 function App() {
   const [loading, setLoading] = useState(true)
   const [coins, setCoins] = useState([])
+  const [cripto, setCripto] = useState(0)
+  const [exchange, setExchange] = useState(0)
+
+  const onSelect = event => {
+    setCripto(event.target.value)
+    }
+  
+
+  const onChange = (event) => {
+    setExchange(
+      cripto === 0 ? 0 : event.target.value / cripto
+    )
+    
+  }
+
   useEffect(()=> {
     fetch("https://api.coinpaprika.com/v1/tickers")
     .then(response=>response.json())
@@ -19,13 +34,35 @@ function App() {
       {loading ? (
         <strong>Loading...</strong>
       ) : (
-        <ul>
-        {coins.map((coin) => 
-          <li>
-            {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price} USD
-          </li>)
-        }
-        </ul>
+
+      <div>
+        <select onChange={onSelect}>
+          <option>--- Choose Coin ---</option>
+          {coins.map((coin) => 
+            <option key={coin.id} value={coin.quotes.USD.price}>
+              {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price} USD
+            </option>
+            )
+          }
+        </select>
+
+        <hr></hr>
+
+        <div>
+          budget     
+          <input
+            type="text"
+            onChange={onChange}
+            placeholder="Input your budget(USD)"
+          />
+        </div>
+
+        <div>
+          exchange  
+          <input readOnly value={exchange} type="text"></input>
+        </div>
+
+      </div>
       )}
     </div>
   );
