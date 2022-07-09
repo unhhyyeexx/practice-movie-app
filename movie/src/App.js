@@ -40,7 +40,16 @@ function App() {
     <div>
       {loading ? <h1>loading...</h1> 
       : <div>{movies.map(movie => (
-          <div key={movie.id}>{movie.title}</div>
+          <div key={movie.id}>
+            <img src={movie.medium_cover_image}></img>
+            <div>
+              <h2>{movie.title}</h2>
+              <p>{movie.summary} </p>
+              <ul>
+                {movie.genres.map(genre => <li key={genre}>{genre}</li>)}
+              </ul>
+            </div>
+          </div>
         ))}
       </div>}
     </div>
