@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
+import Movie from "./Movie"
 
 function App() {
   const [loading, setLoading] = useState(true) 
@@ -40,16 +41,12 @@ function App() {
     <div>
       {loading ? <h1>loading...</h1> 
       : <div>{movies.map(movie => (
-          <div key={movie.id}>
-            <img src={movie.medium_cover_image}></img>
-            <div>
-              <h2>{movie.title}</h2>
-              <p>{movie.summary} </p>
-              <ul>
-                {movie.genres.map(genre => <li key={genre}>{genre}</li>)}
-              </ul>
-            </div>
-          </div>
+          <Movie
+            coverImg={movie.medium_cover_image}
+            title={movie.title}
+            summary={movie.summary}
+            genres={movie.genres}
+          ></Movie>
         ))}
       </div>}
     </div>
