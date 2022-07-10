@@ -3,18 +3,19 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from "react-router-dom"
 import Home from "./routes/Home"
 import Detail from './routes/Detail';
 
 
 function App() {
-  return <Router>
+  return (
+  <Router>
     <Switch>
-      {/* switch가 하는 일: router를 찾는 일(url을 찾음) */}
-      <Route path="/movie">
-        <Detail/>
+      {/* switch가 하는 일: router를 찾는 일(url을 찾음) ; 한번에 하나의 router만 렌더링 되게 */}
+      <Route path="/movie/:id">
+        <Detail />
       </Route>
 
       <Route path="/">
@@ -24,6 +25,6 @@ function App() {
 
     </Switch>
   </Router>
-}
+)}
 
 export default App;
